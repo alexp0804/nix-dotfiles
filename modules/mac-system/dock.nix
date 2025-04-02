@@ -25,11 +25,14 @@
                 ];
 
                 autohide = true;
+                autohide-delay = 0.1;
+                autohide-time-modifier = 0.2;
+
                 minimize-to-application = true; # apps minimize into their icon instead of separate section
-                mru-spaces = false; # disable rearranging spaces based on most recent use
+                mru-spaces = false;             # disable rearranging spaces based on most recent use
                 show-recents = false;
-                tilesize = 64;
-                wvous-tl-corner = 4; # top left corner action is show desktop
+                tilesize = 48;                  # icons are smaller (default 64)
+                wvous-tl-corner = 4;            # top left corner action is show desktop
             };
         };
     };
