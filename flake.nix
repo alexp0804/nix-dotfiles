@@ -40,6 +40,8 @@
                     pkgs.google-chrome
                     pkgs.obsidian
 
+                    pkgs.zsh-vi-mode
+
                     # utils/dependencies
                     pkgs.ripgrep
                     pkgs.bc
