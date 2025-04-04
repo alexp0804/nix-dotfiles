@@ -20,29 +20,25 @@
         let
             configuration = { pkgs, ... }: {
                 nixpkgs.config.allowUnfree = true;
+
                 nixpkgs.hostPlatform = "aarch64-darwin";
                 programs.zsh.enable = true;
 
                 environment.systemPackages = [
-                    # essentials
                     pkgs.git
                     pkgs.tmux
                     pkgs.vim
                     pkgs.htop
                     pkgs.curl
                     pkgs.fzf
-                    pkgs.tree
-
-                    # gui apps
+                    pkgs.jdk17
+                    pkgs.jdk21
                     pkgs.iterm2
                     pkgs.spotify
                     pkgs.discord
                     pkgs.google-chrome
                     pkgs.obsidian
-
                     pkgs.zsh-vi-mode
-
-                    # utils/dependencies
                     pkgs.ripgrep
                     pkgs.bc
                     pkgs.jq
@@ -51,6 +47,7 @@
                     pkgs.gh
                     pkgs.glab
                     pkgs.gnused
+                    pkgs.eza
                 ];
 
                 fonts.packages = [
@@ -68,6 +65,11 @@
                 nix.settings.experimental-features = "nix-command flakes";
 
                 system.configurationRevision = self.rev or self.dirtyRev or null;
+
+                system.activationScripts.extraActivation.text = ''
+                    ln -sf "${pkgs.jdk17}/zulu-17.jdk" "/Library/Java/JavaVirtualMachines/"
+                    ln -sf "${pkgs.jdk21}/zulu-21.jdk" "/Library/Java/JavaVirtualMachines/"
+                '';
 
                 # Used for backwards compatibility, please read the changelog before changing.
                 # $ darwin-rebuild changelog

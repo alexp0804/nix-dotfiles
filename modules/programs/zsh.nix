@@ -9,8 +9,8 @@
         dotDir = ".config/zsh";
 
         shellAliases = {
-            ls = "ls -CFA --color --group-directories-first";
             switch = "darwin-rebuild switch --flake ~/.config/nix";
+            tree = "lt";
         };
 
         history = {

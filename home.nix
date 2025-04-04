@@ -7,6 +7,7 @@
         ./modules/programs/nvim/nvim.nix
         ./modules/programs/git.nix
         ./modules/programs/ssh.nix
+        ./modules/programs/eza.nix
     ];
 
     home.username = "alex";

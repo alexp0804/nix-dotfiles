@@ -40,7 +40,6 @@
                 config = (builtins.readFile ./plugin/telescope.lua);
             }
             which-key-nvim
-            # dependency of telescope-nvim
             telescope-fzf-native-nvim
             vim-tmux-navigator
         ];
