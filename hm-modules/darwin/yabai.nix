@@ -2,7 +2,7 @@
 {
     services = {
         yabai = {
-            enable = true;
+            enable = false;
             config = {
                 focus_follows_mouse = "on";
                 mouse_follows_focus = "off";

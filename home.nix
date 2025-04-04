@@ -2,7 +2,7 @@
 
 { config, pkgs, inputs, ...}: {
     imports = [
-        ./modules/programs
+        ./hm-modules/programs
     ];
 
     home.username = "alex";

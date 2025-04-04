@@ -2,11 +2,13 @@
 {
     services = {
         skhd = {
-            enable = true;
+            enable = false;
             skhdConfig =
                 let
                     yabai = "${pkgs.yabai}/bin/yabai";
                 in
+                    # TODO: some of these aren't working as expected, I'll need to rethink the yabai
+                    # config as a whole.
                     ''
 # Navigation
 alt - h : ${yabai} -m window --focus west

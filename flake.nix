@@ -92,7 +92,7 @@
                         home-manager.verbose = true;
                         home-manager.users.alex = import ./home.nix;
                     }
-                    ./modules/mac-system
+                    ./hm-modules/darwin
                 ];
             };
         };
