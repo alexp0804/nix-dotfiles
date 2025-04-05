@@ -2,6 +2,7 @@
 {
     system = {
         defaults = {
+            spaces.spans-displays = true;
             controlcenter = {
                 BatteryShowPercentage = true;
                 Bluetooth = true;

@@ -5,7 +5,6 @@
         ./karabiner.nix
         ./misc.nix
         ./sketchybar.nix
-        ./skhd.nix
-        ./yabai.nix
+        ./aerospace.nix
     ];
 }

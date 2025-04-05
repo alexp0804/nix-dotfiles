@@ -1,8 +1,8 @@
 { pkgs, ... }:
 {
-    system.defaults.NSGlobalDomain._HIHideMenuBar = true;
+    system.defaults.NSGlobalDomain._HIHideMenuBar = false;
 
     services.sketchybar = {
-        enable = true;
+        enable = false;
     };
 }
