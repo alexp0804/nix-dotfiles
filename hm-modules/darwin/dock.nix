@@ -28,6 +28,8 @@
                 autohide-delay = 0.1;
                 autohide-time-modifier = 0.2;
 
+                expose-group-apps = true;
+
                 minimize-to-application = true; # apps minimize into their icon instead of separate section
                 mru-spaces = false;             # disable rearranging spaces based on most recent use
                 show-recents = false;
