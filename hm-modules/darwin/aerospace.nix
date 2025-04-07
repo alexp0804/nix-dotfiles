@@ -6,28 +6,58 @@
 
         settings = {
             gaps = {
-                inner.horizontal = 8;
-                inner.vertical = 8;
-                outer.left = 8;
-                outer.bottom = 8;
-                outer.top = 8;
-                outer.right = 8;
+                inner.horizontal = 4;
+                inner.vertical = 4;
+                outer.left = 4;
+                outer.bottom = 4;
+                outer.top = 4;
+                outer.right = 4;
             };
 
             on-window-detected = [
                 {
                     "if" = {
-                        app-id = "com.hnc.Discord";
-                        app-name-regex-substring = "Discord";
-                        during-aerospace-startup = false;
+                        app-id = "com.googlecode.iterm2";
+                        app-name-regex-substring = "iTerm2";
+                        during-aerospace-startup = true;
+                    };
+                    run = [ "move-node-to-workspace 1" ];
+                }
+                {
+                    "if" = {
+                        app-id = "com.google.Chrome";
+                        app-name-regex-substring = "Google Chrome";
+                        during-aerospace-startup = true;
+                    };
+                    run = [ "move-node-to-workspace 2" ];
+                }
+                {
+                    "if" = {
+                        app-id = "md.obsidian";
+                        app-name-regex-substring = "Obsidian";
+                        during-aerospace-startup = true;
                     };
                     run = [ "move-node-to-workspace 3" ];
+                }
+                {
+                    "if" = {
+                        app-id = "com.spotify.client";
+                        app-name-regex-substring = "Spotify";
+                        during-aerospace-startup = true;
+                    };
+                    run = [ "move-node-to-workspace 4" ];
+                }
+                {
+                    "if" = {
+                        app-id = "com.hnc.Discord";
+                        app-name-regex-substring = "Discord";
+                        during-aerospace-startup = true;
+                    };
+                    run = [ "move-node-to-workspace 5" ];
                 }
             ];
 
             mode.main.binding = {
-                alt-enter = "exec-and-forget open -n ${pkgs.iterm2}/Applications/iTerm2.app";
-
                 alt-h = "focus left";
                 alt-j = "focus down";
                 alt-k = "focus up";
