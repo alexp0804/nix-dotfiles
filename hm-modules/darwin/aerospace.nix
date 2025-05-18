@@ -33,8 +33,8 @@
                 }
                 {
                     "if" = {
-                        app-id = "md.obsidian";
-                        app-name-regex-substring = "Obsidian";
+                        app-id = "com.hnc.Discord";
+                        app-name-regex-substring = "Discord";
                         during-aerospace-startup = true;
                     };
                     run = [ "move-node-to-workspace 3" ];
@@ -46,14 +46,6 @@
                         during-aerospace-startup = true;
                     };
                     run = [ "move-node-to-workspace 4" ];
-                }
-                {
-                    "if" = {
-                        app-id = "com.hnc.Discord";
-                        app-name-regex-substring = "Discord";
-                        during-aerospace-startup = true;
-                    };
-                    run = [ "move-node-to-workspace 5" ];
                 }
             ];
 
