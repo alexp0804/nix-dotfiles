@@ -75,6 +75,7 @@
                 # $ darwin-rebuild changelog
                 system.stateVersion = 6;
 
+                system.primaryUser = "alex";
                 users.users.alex = {
                     name = "alex";
                     home = "/Users/alex";

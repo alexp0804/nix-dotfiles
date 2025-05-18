@@ -9,7 +9,7 @@
         dotDir = ".config/zsh";
 
         shellAliases = {
-            switch = "darwin-rebuild switch --flake ~/.config/nix";
+            switch = "sudo darwin-rebuild switch --flake ~/.config/nix";
             tree = "lt";
         };
 
