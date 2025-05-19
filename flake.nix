@@ -48,6 +48,7 @@
                     pkgs.glab
                     pkgs.gnused
                     pkgs.eza
+                    pkgs.neofetch
                 ];
 
                 fonts.packages = [
