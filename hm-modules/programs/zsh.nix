@@ -1,3 +1,4 @@
+# the zshell
 { pkgs, ... }:
 {
     programs.zsh = {

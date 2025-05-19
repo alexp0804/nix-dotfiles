@@ -1,3 +1,5 @@
+# git.
+# defines user config, fancy diff outputs, some default behaviors
 { pkgs, ... }:
 {
     programs.git = {

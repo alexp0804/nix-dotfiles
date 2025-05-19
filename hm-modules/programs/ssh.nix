@@ -1,3 +1,4 @@
+# secure shell. hosts configs for my remote server and pi.
 { pkgs, ... }:
 {
     programs.ssh = {

@@ -1,3 +1,4 @@
+# terminal multiplexer
 { pkgs, ... }:
 {
     programs.tmux = {

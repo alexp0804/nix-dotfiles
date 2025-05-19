@@ -1,3 +1,5 @@
+# basically fancy ls.
+# has icons, colors, grouping by file type, and is fast
 { pkgs, ... }:
 {
     programs.eza = {

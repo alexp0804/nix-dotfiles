@@ -8,7 +8,7 @@ require("mini.operators").setup()   -- text edit operators (sort, evalute, repla
 local indentscope = require("mini.indentscope") -- adds a fancy scope indicator
 indentscope.setup {
     symbol = ".",
-    draw = {
+    draw = { -- defines animation for the scope indicator
         animation = indentscope.gen_animation.quadratic({
             easing = 'in-out',
             duration = 300,

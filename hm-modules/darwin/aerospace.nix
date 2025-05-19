@@ -1,3 +1,4 @@
+# tiling window manager, similar to i3
 # https://nikitabobko.github.io/AeroSpace/commands
 { pkgs, ... }:
 {
