@@ -49,6 +49,8 @@
                     pkgs.eza
                     pkgs.neofetch
                     pkgs.nodejs
+                    pkgs.clang-tools
+                    pkgs.bear
                 ];
 
                 fonts.packages = [
