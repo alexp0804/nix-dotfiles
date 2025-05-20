@@ -1,6 +1,3 @@
--- use NvimTree by default
--- vim.cmd("let g:netrw_liststyle = 3")
-
 local opt = vim.opt
 
 -- auto save, no backups
@@ -53,9 +50,6 @@ opt.backspace = "indent,eol,start"
 
 -- clipboard
 opt.clipboard:append("unnamedplus")
-
--- highlight end of buffer line numbers
-vim.cmd([[set fillchars+=eob:\-]])
 
 -- split window behavior (new vertical windows on right, new horizontal windows below)
 opt.splitright = true
