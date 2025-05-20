@@ -25,8 +25,8 @@ nvimtree.setup({
 local keymap = vim.keymap
 
 keymap.set("n", "<leader>e", "<Nop>", { desc = "NvimTree" })
-keymap.set("n", "<leader>ee", "<cmd>NvimTreeToggle<CR>", { desc = "NvimTree toggle" })
-keymap.set("n", "<leader>er", "<cmd>NvimTreeRefresh<CR>", { desc = "NvimTree refresh" })
-keymap.set("n", "<leader>eb", "<cmd>NvimTreeCollapseKeepBuffers<CR>", { desc = "NvimTree collapse, keep buffers" })
-keymap.set("n", "<leader>ec", "<cmd>NvimTreeCollapse<CR>", { desc = "NvimTree collapse" })
+keymap.set("n", "<leader>ee", "<cmd>NvimTreeToggle<CR>", { desc = "toggle" })
+keymap.set("n", "<leader>ec", "<cmd>NvimTreeCollapseKeepBuffers<CR>", { desc = "collapse, keep buffers open" })
+
+keymap.set("n", "<leader>er", "<cmd>NvimTreeRefresh<CR>", { desc = "refresh" })
 

@@ -8,7 +8,6 @@ telescope.setup({
             i = {
                 ["<Up>"] = actions.move_selection_previous,
                 ["<Down>"] = actions.move_selection_next,
-                ["<C-z>"] = actions.select_vertical,
             },
         },
     },

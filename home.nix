@@ -9,7 +9,7 @@
     home.homeDirectory = "/Users/alex";
     home.stateVersion = "23.05";
 
-    home.packages = [];
+    home.packages = with pkgs; [ ];
 
     programs.home-manager.enable = true;
 }

@@ -8,45 +8,43 @@
         vimAlias = true;
         vimdiffAlias = true;
 
+        # Language servers
+        extraPackages = with pkgs; [
+            libclang
+            pyright
+            vscode-langservers-extracted # html, css, json, eslint, md
+            vim-language-server
+            lua-language-server
+
+            # nix
+            nil
+            nixpkgs-fmt
+        ];
+
         plugins = with pkgs.vimPlugins; [
-            {
-                plugin = tokyonight-nvim;
-                type = "lua";
-                config = "vim.cmd[[colorscheme tokyonight]]";
-            }
-            {
-                plugin = lualine-nvim;
-                type = "lua";
-                config = (builtins.readFile ./plugin/lualine-nvim.lua);
-            }
-            {
-                plugin = nvim-treesitter.withAllGrammars;
-                type = "lua";
-                config = (builtins.readFile ./plugin/nvim-treesitter.lua);
-            }
-            {
-                plugin = mini-nvim;
-                type = "lua";
-                config = (builtins.readFile ./plugin/mini-nvim.lua);
-            }
-            {
-                plugin = nvim-tree-lua;
-                type = "lua";
-                config = (builtins.readFile ./plugin/nvim-tree.lua);
-            }
-            {
-                plugin = telescope-nvim;
-                type = "lua";
-                config = (builtins.readFile ./plugin/telescope.lua);
-            }
-            which-key-nvim
+            tokyonight-nvim
+            lualine-nvim
+            nvim-tree-lua
+            telescope-nvim
             telescope-fzf-native-nvim
+            mini-nvim
+            which-key-nvim
             vim-tmux-navigator
+            nvim-treesitter.withAllGrammars
+            nvim-lspconfig
         ];
 
         extraLuaConfig = ''
             ${builtins.readFile ./setting/options.lua}
             ${builtins.readFile ./setting/keymaps.lua}
+            vim.cmd[[colorscheme tokyonight]]
+
+            ${builtins.readFile ./plugin/lualine-nvim.lua}
+            ${builtins.readFile ./plugin/nvim-tree.lua}
+            ${builtins.readFile ./plugin/telescope.lua}
+            ${builtins.readFile ./plugin/mini-nvim.lua}
+            ${builtins.readFile ./plugin/nvim-treesitter.lua}
+            ${builtins.readFile ./plugin/nvim-lspconfig.lua}
         '';
     };
 }

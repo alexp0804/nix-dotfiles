@@ -22,7 +22,6 @@
                 nixpkgs.config.allowUnfree = true;
 
                 nixpkgs.hostPlatform = "aarch64-darwin";
-                programs.zsh.enable = true;
 
                 environment.systemPackages = [
                     pkgs.git
@@ -49,6 +48,7 @@
                     pkgs.gnused
                     pkgs.eza
                     pkgs.neofetch
+                    pkgs.nodejs
                 ];
 
                 fonts.packages = [
