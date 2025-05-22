@@ -18,6 +18,9 @@
 
             # natural scrolling direction
             NSGlobalDomain."com.apple.swipescrolldirection" = false;
+
+            # disable auto capitalization
+            NSGlobalDomain.NSAutomaticCapitalizationEnabled = false;
         };
         keyboard = {
             enableKeyMapping = true;
