@@ -8,6 +8,7 @@ telescope.setup({
             i = {
                 ["<Up>"] = actions.move_selection_previous,
                 ["<Down>"] = actions.move_selection_next,
+                ["<C-q>"] = actions.smart_send_to_qflist, -- sends all if none selected, otherwise selected
             },
         },
     },
