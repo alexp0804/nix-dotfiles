@@ -31,8 +31,8 @@ opt.background = "dark"
 opt.cursorline = true
 opt.colorcolumn = "100"
 
--- keep signcolumn on by default
-opt.signcolumn = "yes"
+-- keep signcolumn always on by default, 3 icons width
+opt.signcolumn = "yes:3"
 
 -- minimum number of screen lines above and below cursor
 opt.scrolloff = 10
