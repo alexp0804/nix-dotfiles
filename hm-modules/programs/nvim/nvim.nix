@@ -1,4 +1,18 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
+let
+    getLuaFilePaths = dir:
+        builtins.filter (path: lib.strings.hasSuffix ".lua" path)
+            (lib.filesystem.listFilesRecursive dir);
+
+    concatFileContents = files:
+        lib.strings.concatMapStringsSep "\n" (file: builtins.readFile file) files;
+
+    readLuaFileContents = dir:
+        concatFileContents (getLuaFilePaths dir);
+
+    pluginConfigs = readLuaFileContents ./plugin;
+    settingConfigs = readLuaFileContents ./setting;
+in
 {
     programs.neovim = {
         enable = true;
@@ -35,16 +49,9 @@
         ];
 
         extraLuaConfig = ''
-            ${builtins.readFile ./setting/options.lua}
-            ${builtins.readFile ./setting/keymaps.lua}
             vim.cmd[[colorscheme tokyonight]]
-
-            ${builtins.readFile ./plugin/lualine-nvim.lua}
-            ${builtins.readFile ./plugin/nvim-tree.lua}
-            ${builtins.readFile ./plugin/telescope.lua}
-            ${builtins.readFile ./plugin/mini-nvim.lua}
-            ${builtins.readFile ./plugin/nvim-treesitter.lua}
-            ${builtins.readFile ./plugin/nvim-lspconfig.lua}
+            ${settingConfigs}
+            ${pluginConfigs}
         '';
     };
 }
