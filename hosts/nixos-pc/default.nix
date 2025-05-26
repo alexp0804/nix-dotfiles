@@ -12,7 +12,8 @@ nixosModules,
         inputs.hardware.nixosModules.common-pc-ssd
 
         ./hardware-configuration.nix
-        "${nixosModules}/common"
+        ../../modules/system-packages.nix
+        "${nixosModules}"
         "${nixosModules}/desktop/hyprland"
     ];
 

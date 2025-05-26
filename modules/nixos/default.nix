@@ -1,10 +1,6 @@
 {
-inputs,
-outputs,
-lib,
-config,
-userConfig,
 pkgs,
+userConfig,
 ...
 }: {
     imports = [
@@ -44,12 +40,6 @@ pkgs,
     # System packages
     nixpkgs.config.allowUnfree = true;
     environment.systemPackages = with pkgs; [
-        gcc
-        glib
-        gnumake
-        neovim
-        wget
-        git
         minimal-grub-theme
     ];
 

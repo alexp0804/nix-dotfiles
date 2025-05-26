@@ -3,13 +3,13 @@
 {
 inputs,
 hostname,
-nhModules,
+darwinModules,
 ...
 }: {
     imports = [
+        ../../modules/system-packages.nix
         ./hardware-configuration.nix
-        "./${nhModules}/common-modules.nix"
-        "./${nhModules}/darwin-modules.nix"
+        "${darwinModules}"
     ];
 
     nixpkgs.hostPlatform = "aarch64-darwin";
