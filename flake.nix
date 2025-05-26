@@ -1,103 +1,100 @@
-# ~/.config/nix/flake.nix
-
 {
-    description = "macbook pro system config";
+    description = "Nixos config flake";
 
     inputs = {
-        nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-        nix-darwin = {
-            url = "github:LnL7/nix-darwin/master";
-            inputs.nixpkgs.follows = "nixpkgs";
-        };
-        mac-app-util.url = "github:hraban/mac-app-util";
+        # Nixpkgs
+        nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+        nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
+
+        # Home manager
         home-manager = {
             url = "github:nix-community/home-manager";
             inputs.nixpkgs.follows = "nixpkgs";
         };
+
+        # Darwin
+        darwin = {
+            url = "github:LnL7/nix-darwin";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
+
+        # Nixos hardware optimizations
+        hardware.url = "github:nixos/nixos-hardware";
+
+        # Mac-app util (for letting nix-configured Applications appear in spotlight)
+        mac-app-util.url = "github:hraban/mac-app-util";
     };
 
-    outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager, mac-app-util }:
-        let
-            configuration = { pkgs, ... }: {
-                nixpkgs.config.allowUnfree = true;
+    outputs = {
+        self,
+        nixpkgs,
+        darwin,
+        home-manager,
+        mac-app-util,
+        ...
+        } @ inputs: let
+            inherit (self) outputs;
 
-                nixpkgs.hostPlatform = "aarch64-darwin";
-
-                environment.systemPackages = [
-                    pkgs.git
-                    pkgs.tmux
-                    pkgs.vim
-                    pkgs.htop
-                    pkgs.curl
-                    pkgs.fzf
-                    pkgs.jdk17
-                    pkgs.jdk21
-                    pkgs.iterm2
-                    pkgs.spotify
-                    pkgs.discord
-                    pkgs.google-chrome
-                    pkgs.obsidian
-                    pkgs.zsh-vi-mode
-                    pkgs.ripgrep
-                    pkgs.bc
-                    pkgs.jq
-                    pkgs.coreutils
-                    pkgs.gawk
-                    pkgs.gh
-                    pkgs.glab
-                    pkgs.gnused
-                    pkgs.eza
-                    pkgs.neofetch
-                    pkgs.nodejs
-                    pkgs.clang-tools
-                    pkgs.bear
-                ];
-
-                fonts.packages = [
-                    pkgs.nerd-fonts.jetbrains-mono
-                ];
-
-                homebrew = {
-                    onActivation.cleanup = "uninstall";
-                    enable = true;
-                    taps = [];
-                    brews = [];
-                    casks = [ "font-noto-sans-symbols-2" ];
-                };
-
-                nix.settings.experimental-features = "nix-command flakes";
-
-                system.configurationRevision = self.rev or self.dirtyRev or null;
-
-                system.activationScripts.extraActivation.text = ''
-                    ln -sf "${pkgs.jdk17}/zulu-17.jdk" "/Library/Java/JavaVirtualMachines/"
-                    ln -sf "${pkgs.jdk21}/zulu-21.jdk" "/Library/Java/JavaVirtualMachines/"
-                '';
-
-                # Used for backwards compatibility, please read the changelog before changing.
-                # $ darwin-rebuild changelog
-                system.stateVersion = 6;
-
-                system.primaryUser = "alex";
-                users.users.alex = {
+            users = {
+                alex = {
+                    fullName = "Alexander Peterson";
                     name = "alex";
-                    home = "/Users/alex";
                 };
             };
-        in
-            {
-            darwinConfigurations."macbook" = nix-darwin.lib.darwinSystem {
-                modules = [
-                    configuration
-                    mac-app-util.darwinModules.default
-                    home-manager.darwinModules.home-manager  {
-                        home-manager.useGlobalPkgs = true;
-                        home-manager.useUserPackages = true;
-                        home-manager.verbose = true;
-                        home-manager.users.alex = import ./home.nix;
-                    }
-                    ./hm-modules/darwin
-                ];
+
+            # function to create nixos config
+            mkNixosConfiguration = hostname: username:
+                nixpkgs.lib.nixosSystem {
+                    specialArgs = {
+                        inherit inputs outputs hostname;
+                        userConfig = users.${username};
+                        nixosModules = "${self}/modules/nixos";
+                    };
+                    modules = [
+                        ./hosts/${hostname}
+                    ];
+                };
+
+            # function to create nix-darwin config
+            mkDarwinConfiguration = hostname: username:
+                darwin.lib.darwinSystem {
+                    system = "aarch64-darwin";
+                    specialArgs = {
+                        inherit inputs outputs hostname;
+                        userConfig = users.${username};
+                    };
+                    modules = [
+                        ./hosts/${hostname}
+                        home-manager.darwinModules.home-manager
+                        mac-app-util.darwinModules.default
+                    ];
+                };
+
+            # function to create home-manager config
+            mkHomeConfiguration = system: username: hostname:
+                home-manager.lib.homeManagerConfiguration {
+                    pkgs = import nixpkgs {inherit system;};
+                    extraSpecialArgs = {
+                        inherit inputs outputs hostname;
+                        userConfig = users.${username};
+                        nhModules = "${self}/modules/home-manager";
+                    };
+                    modules = [
+                        ./users/${username}/${hostname}
+                    ];
+                };
+        in {
+            nixosConfigurations = {
+                nixos-pc = mkNixosConfiguration "nixos-pc" "alex";
+            };
+
+            darwinConfigurations = {
+                macbook = mkDarwinConfiguration "macbook" "alex";
+            };
+
+            homeConfigurations = {
+                "alex@nixos-pc" = mkHomeConfiguration "x86_64-linux" "alex" "nixos-pc";
+                "alex@macbook" = mkHomeConfiguration "aarch64-darwin" "alex" "macbook";
             };
         };
 }
